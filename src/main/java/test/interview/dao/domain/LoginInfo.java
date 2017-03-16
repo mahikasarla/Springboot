@@ -45,12 +45,12 @@ public class LoginInfo {
         this.mailId = mailId;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPassword1() {
+        return password1;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword1(String password) {
+        this.password1 = password;
     }
 
     public Timestamp getCreatedTime() {
@@ -62,12 +62,12 @@ public class LoginInfo {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String firstName;
     private String lastName;
     private String mailId;
-    private String password;
+    private String password1;
     private Timestamp createdTime;
 
 }

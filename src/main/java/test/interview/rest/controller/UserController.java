@@ -7,9 +7,6 @@ import test.interview.service.UserService;
 import java.io.IOException;
 import java.util.List;
 
-import static org.aspectj.weaver.tools.cache.SimpleCacheFactory.path;
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
-
 /**
  * Created by kasar on 3/15/2017.
  */
@@ -23,9 +20,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/api/v1/user", method = RequestMethod.POST)
-    public Long createUser(@RequestBody LoginInfo loginInfo ){
+    public String createUser(@RequestBody LoginInfo loginInfo ){
 
-        return userservice.save(loginInfo);
+        return userservice.save(loginInfo)+" Saved";
     }
     @RequestMapping(value="/api/v1/user")
     public List<LoginInfo> getDetails(){
@@ -34,7 +31,22 @@ public class UserController {
     }
     @RequestMapping(value="/api/v1/user/{id}")
     public LoginInfo getUser(@PathVariable("id") Long id) throws IOException{
+
         return userservice.userInfo(id);
     }
-
-}
+    @RequestMapping(value = "/api/v1/user/{id}", method = RequestMethod.DELETE)
+    public String removeId(@PathVariable ("id") Long id) throws  IOException{
+        userservice.deleteId(id);
+        return id + " Deleted";
+    }
+    @RequestMapping(value = "/api/v1/user/search/{searchByFirstName}")
+    public List<LoginInfo> getUserByName(@PathVariable("searchByFirstName") String firstname) throws IOException{
+       List<LoginInfo> list= userservice.getByFirstName(firstname);
+        return list;
+    }
+    @RequestMapping(value= "/api/v1/user/search/like/{searchByLike}")
+    public List<LoginInfo> getUserByLike(@PathVariable("searchByLike") String like) throws IOException {
+        List<LoginInfo> list = userservice.getByLike(like);
+        return list;
+    }
+    }
