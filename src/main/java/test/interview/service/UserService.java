@@ -28,6 +28,7 @@ public class UserService {
 
     }
 
+
     public List<LoginInfo> getUsers() {
         return loginInfoRepository.findAll();
     }

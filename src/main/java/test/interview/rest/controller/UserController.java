@@ -1,6 +1,7 @@
 package test.interview.rest.controller;
 
 import org.springframework.web.bind.annotation.*;
+import test.interview.dao.domain.UserLogin;
 import test.interview.dao.domain.LoginInfo;
 import test.interview.service.UserService;
 
@@ -49,4 +50,11 @@ public class UserController {
         List<LoginInfo> list = userservice.getByLike(like);
         return list;
     }
+
+    @RequestMapping(value="/api/v1/login", method = RequestMethod.POST)
+
+    public String userAuthentication(@RequestBody UserLogin userLogin) throws IOException{
+        String name =userLogin.toString();
+        return name;
     }
+}
